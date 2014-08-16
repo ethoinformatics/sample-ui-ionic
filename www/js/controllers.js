@@ -25,8 +25,8 @@ angular.module('starter.controllers', [])
 		},
 		{
 			id: 3, 
-			label: 'Record C', 
-			template: 'login.html',
+			label: 'Text area', 
+			template: 'text-area.html',
 			model: {
 				type: 3,
 			}
@@ -38,7 +38,15 @@ angular.module('starter.controllers', [])
 	}
 
 	function loadRecordModal(recordType){
+		$scope.closeModal();
 		return $ionicModal.fromTemplateUrl('templates/record-types/'+ recordType.template, { scope: $scope });
+	}
+
+	function loadDataModal(rawData){
+		$scope.rawData = rawData;
+		$scope.closeModal();
+		
+		return $ionicModal.fromTemplateUrl('templates/data-view.html', { scope: $scope});
 	}
 
 	$scope.closeModal = function() {
@@ -83,7 +91,12 @@ angular.module('starter.controllers', [])
 	};
 
 	$scope.saveRecords = function(){
-		alert('adsfasdf');
+
+		loadDataModal(JSON.stringify($scope.records, null, "\t"))
+			.then(function(modal){
+				currentModal = modal;
+				currentModal.show();
+			});
 	};
 
 })

@@ -1,0 +1,21 @@
+<div class="modal">
+  <ion-header-bar>
+    <h1 class="title">Text Area</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeModal()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="closeModal()">
+      <div class="list">
+        <label class="item item-input">
+			<textarea rows="10" placeholder="Write here" ng-model="record.text"> </textarea>
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Ok</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</div>
+
