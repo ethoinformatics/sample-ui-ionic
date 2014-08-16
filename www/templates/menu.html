@@ -13,7 +13,7 @@
 	</header>
 	<ion-content class="has-header">
 	  <ion-list>
-		<ion-item ng-repeat="recordType in recordTypes" nav-clear menu-close ng-click="login()">
+	  <ion-item ng-repeat="recordType in recordTypes" nav-clear menu-close ng-click="addRecord({{recordType.id}})">
 			{{recordType.label}}
 		  </ion-item>
 	  </ion-list>

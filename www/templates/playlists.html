@@ -1,12 +1,17 @@
-<ion-view title="Playlists">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
-    <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
-        {{playlist.title}}
-      </ion-item>
-    </ion-list>
-  </ion-content>
+<ion-view title="Record Manager">
+	<ion-nav-buttons side="left">
+		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+	</ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button  class="button button-balanced ">Save</button>
+	</ion-nav-buttons>
+	<ion-content class="has-header">
+		<ion-list>
+
+			<ion-item class="item-icon-right" ng-repeat="record in records" ng-click="editRecord({{record.id}})">
+				<strong>{{record.label}}</strong> - {{record.type}}
+				<i ng-click="removeRecord({{record.id}})" class="icon assertive ion-close-circled"></i>
+			</ion-item>
+		</ion-list>
+	</ion-content>
 </ion-view>

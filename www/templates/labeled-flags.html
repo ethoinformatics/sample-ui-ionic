@@ -1,0 +1,43 @@
+<div class="modal">
+  <ion-header-bar>
+    <h1 class="title">Labeled Flags</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeModal()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="closeRecord()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Label</span>
+          <input type="text" ng-model="record.label">
+        </label>
+		<div class="item item-divider">
+			Flags
+		</div>
+		<div class="item item-toggle">
+			A
+			<label class="toggle toggle-assertive">
+				<input type="checkbox" ng-model="record.flagA">
+					<div class="track">
+						<div class="handle"></div>
+					</div>
+			</label>
+		</div>
+		<div class="item item-toggle">
+			B
+			<label class="toggle toggle-balanced">
+				<input type="checkbox"ng-model="record.flagB">
+					<div class="track">
+						<div class="handle"></div>
+					</div>
+			</label>
+		</div>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Ok</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</div>
+

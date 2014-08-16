@@ -1,52 +1,88 @@
+/* global angular: false, _: false */
+
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-  // Form data for the login modal
-  $scope.loginData = {};
-  $scope.recordTypes = [
-		{label: 'Record A', id: 1},
-		{label: 'Record B', id: 2},
-		{label: 'Record C', id: 3},
+	var currentModal, currentId = 0;
+
+	$scope.records = [];
+	$scope.recordTypes = [
+		{
+			id: 1, 
+			label: 'Labeled Flags', 
+			template: 'templates/labeled-flags.html', 
+			model: {
+				type: 1,
+			}
+		},
+		{
+			id: 2, 
+			label: 'Record B', 
+			template: 'templates/login.html',
+			model: {
+				type: 2,
+			}
+		},
+		{
+			id: 3, 
+			label: 'Record C', 
+			template: 'templates/login.html',
+			model: {
+				type: 3,
+			}
+		},
 	];
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
+	function recordTypeById(id){
+		return _.find($scope.recordTypes, function(r){ return id == r.id; });
+	}
 
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
+	function loadRecordModal(recordType){
+		return $ionicModal.fromTemplateUrl(recordType.template, { scope: $scope });
+	}
 
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
+	$scope.closeModal = function() {
+		if (!currentModal) return;
+		currentModal.hide();
+	};
 
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+	$scope.addRecord = function(recordTypeId) {
+		var recordType = recordTypeById(recordTypeId);
+		$scope.record = _.extend({}, recordType.model);
+		$scope.record.id = ++currentId;
+		$scope.records.push($scope.record);
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
+		loadRecordModal(recordType)
+			.then(function(modal){
+				currentModal = modal;
+				currentModal.show();
+			});
+	};
+
+	$scope.editRecord = function(recordId) {
+		var record = _.find($scope.records, function(r){ return r.id == recordId; });
+		var recordType = recordTypeById(record.type);
+		$scope.record = record;
+
+		loadRecordModal(recordType)
+			.then(function(modal){
+				currentModal = modal;
+				currentModal.show();
+			});
+	};
+
+	$scope.removeRecord = function(recordId) {
+		_.remove($scope.records, function(r){ return r.id == recordId; });
+	};
+
+	$scope.saveRecord = function(){
+		console.dir($scope.record);
+		$scope.closeModal();
+	};
+
 })
 
 .controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
