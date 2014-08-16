@@ -1,0 +1,26 @@
+<div class="modal">
+  <ion-header-bar>
+    <h1 class="title">Name and Age</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeModal()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="closeModal()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="record.name">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Age</span>
+          <input type="number" ng-model="record.age">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Ok</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</div>
+

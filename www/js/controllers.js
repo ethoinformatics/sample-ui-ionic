@@ -9,16 +9,16 @@ angular.module('starter.controllers', [])
 	$scope.recordTypes = [
 		{
 			id: 1, 
-			label: 'Labeled Flags', 
-			template: 'templates/labeled-flags.html', 
+			label: 'Labeled flags', 
+			template: 'labeled-flags.html', 
 			model: {
 				type: 1,
 			}
 		},
 		{
 			id: 2, 
-			label: 'Record B', 
-			template: 'templates/login.html',
+			label: 'Name and age', 
+			template: 'name-age.html',
 			model: {
 				type: 2,
 			}
@@ -26,7 +26,7 @@ angular.module('starter.controllers', [])
 		{
 			id: 3, 
 			label: 'Record C', 
-			template: 'templates/login.html',
+			template: 'login.html',
 			model: {
 				type: 3,
 			}
@@ -38,7 +38,7 @@ angular.module('starter.controllers', [])
 	}
 
 	function loadRecordModal(recordType){
-		return $ionicModal.fromTemplateUrl(recordType.template, { scope: $scope });
+		return $ionicModal.fromTemplateUrl('templates/record-types/'+ recordType.template, { scope: $scope });
 	}
 
 	$scope.closeModal = function() {
@@ -46,10 +46,17 @@ angular.module('starter.controllers', [])
 		currentModal.hide();
 	};
 
+	function createRecord(recordType){
+		var r = _.extend({}, recordType.model);
+		r.id = ++currentId;
+		r.label = recordType.label;
+
+		return r;
+	}
+
 	$scope.addRecord = function(recordTypeId) {
 		var recordType = recordTypeById(recordTypeId);
-		$scope.record = _.extend({}, recordType.model);
-		$scope.record.id = ++currentId;
+		$scope.record = createRecord(recordType);
 		$scope.records.push($scope.record);
 
 		loadRecordModal(recordType)
@@ -75,9 +82,8 @@ angular.module('starter.controllers', [])
 		_.remove($scope.records, function(r){ return r.id == recordId; });
 	};
 
-	$scope.saveRecord = function(){
-		console.dir($scope.record);
-		$scope.closeModal();
+	$scope.saveRecords = function(){
+		alert('adsfasdf');
 	};
 
 })
