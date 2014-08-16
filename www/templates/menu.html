@@ -13,9 +13,9 @@
 	</header>
 	<ion-content class="has-header">
 	  <ion-list>
-	  <ion-item ng-repeat="recordType in recordTypes" nav-clear menu-close ng-click="addRecord({{recordType.id}})">
+		<ion-item ng-repeat="recordType in recordTypes" nav-clear menu-close ng-click="addRecord({{recordType.id}})">
 			{{recordType.label}}
-		  </ion-item>
+		</ion-item>
 	  </ion-list>
 	</ion-content>
   </ion-side-menu>
